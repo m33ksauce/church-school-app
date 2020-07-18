@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Classrooms</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item *ngFor="let room of rooms">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{room.RoomName}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        Available: {{room.getAvailable()}} / {{room.Capactiy}}
+        <br>
+        <div>
+          <ion-button
+          *ngIf="canCheckIn(room) && !room.isCheckedIn"
+          (click)="checkIn(room)" >Check In!</ion-button>
+          <ion-button
+          *ngIf="room.isCheckedIn"
+          (click)="checkOut(room)" >Cancel</ion-button>
+          <ion-button
+          *ngIf="!canCheckIn(room) && !room.isCheckedIn"
+          disabled
+          (click)="checkIn(room)" >Unavailable</ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </ion-item>
+</ion-content>
